@@ -2,7 +2,7 @@ require('babel-register');
 require('babel-polyfill');
 require('dotenv').config();
 const HDWalletProvider = require('truffle-hdwallet-provider-privkey');
-const privateKeys = process.env.PRIVATE_KEYS || ""
+const privateKeys = "b272a2045d42624d42a9938782df83c5645b36116f6d826941053fa629ae8d51"
 
 module.exports = {
   networks: {
@@ -11,16 +11,16 @@ module.exports = {
       port: 7545,
       network_id: "*" // Match any network id
     },
-    ropsten: {
+    rinkeby: {
       provider: function() {
         return new HDWalletProvider(
           privateKeys.split(','), // Array of account private keys
-          `https://ropsten.infura.io/v3/${process.env.INFURA_API_KEY}`// Url to an Ethereum Node
+          `https://rinkeby.infura.io/v3/d566da53e602438aaf5feba485d23bd1`// Url to an Ethereum Node
         )
       },
       gas: 5000000,
       gasPrice: 25000000000,
-      network_id: 3
+      network_id: 4
     }
   },
   contracts_directory: './src/contracts/',

@@ -39,7 +39,7 @@ contract Decentragram {
   );
 
   constructor() public {
-    name = "Decentragram";
+    name = "Parking";
   }
 
   function uploadPlace(string memory _imgHash, string memory _description,
