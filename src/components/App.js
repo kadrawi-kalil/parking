@@ -35,6 +35,7 @@ class App extends Component {
     // Load account
     const accounts = await web3.eth.getAccounts()
     this.setState({ account: accounts[0] })
+    console.log('account',accounts[0]);
     // Network ID
     const networkId = await web3.eth.net.getId()
     const networkData = Decentragram.networks[networkId]
@@ -42,13 +43,25 @@ class App extends Component {
       const decentragram = new web3.eth.Contract(Decentragram.abi, networkData.address)
       this.setState({ decentragram })
       const placesCount = await decentragram.methods.placeCount().call()
+      const owner = await decentragram.methods.owner().call()
+      console.log('owner',owner);
+      this.setState({ owner })
       this.setState({ placesCount })
       // Load places
       for (var i = 1; i <= placesCount; i++) {
         const place = await decentragram.methods.places(i).call()
+        console.log("place",place.author);
         this.setState({
           places: [...this.state.places, place]
         })
+        console.log(place.author+"==="+placesCount)
+        if(place.author===this.state.account){
+          
+          this.setState({
+          clientplace: [...this.state.clientplace, place]
+          })
+        }
+
       }
       // Sort places. Show highest tipped places first
       this.setState({
@@ -104,7 +117,9 @@ class App extends Component {
       account: '',
       decentragram: null,
       places: [],
-      loading: true
+      clientplace: [],
+      loading: true,
+      owner: ''
     }
 
     this.uploadPlace = this.uploadPlace.bind(this)
@@ -119,7 +134,7 @@ class App extends Component {
         { this.state.loading
           ? <div id="loader" className="text-center mt-5"><p>Loading...</p></div>
           : <Main
-              places={this.state.places}
+              places={this.state.owner ===this.state.account?this.state.places:this.state.clientplace}
               captureFile={this.captureFile}
               uploadPlace={this.uploadPlace}
               tipPlaceOwner={this.tipPlaceOwner}

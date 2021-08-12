@@ -3,6 +3,7 @@ pragma solidity ^0.5.0;
 contract Decentragram {
   string public name;
   uint public placeCount = 0;
+  address public owner;
   mapping(uint => Place) public places;
 
   struct Place {
@@ -40,6 +41,7 @@ contract Decentragram {
 
   constructor() public {
     name = "Parking";
+    owner = msg.sender;
   }
 
   function uploadPlace(string memory _imgHash, string memory _description,

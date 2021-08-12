@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import Identicon from 'identicon.js';
 import { NavDropdown } from 'react-bootstrap';
-
 class Main extends Component {
 
   render() {
     return (
-      <div className="container-fluid mt-5">
+      <div className="container mt-5">
         <div className="row">
           <main role="main" className="col-lg-12 ml-auto mr-auto" style={{ maxWidth: '500px' }}>
             <div className="content mr-auto ml-auto">
@@ -91,6 +90,7 @@ class Main extends Component {
                         >
                           TIP 0.1 ETH
                         </button>
+                        
                       </li>
                     </ul>
                   </div>
