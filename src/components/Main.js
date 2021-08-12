@@ -4,6 +4,8 @@ import { NavDropdown } from 'react-bootstrap';
 class Main extends Component {
 
   render() {
+
+
     return (
       <div className="container mt-5">
         <div className="row">
@@ -11,7 +13,7 @@ class Main extends Component {
             <div className="content mr-auto ml-auto">
               <p>&nbsp;</p>
               <h2>Reserve Place</h2>
-              <form onSubmit={(event) => {
+            {!this.props.owner?  <form onSubmit={(event) => {
                 event.preventDefault()
                 const description = this.placeDescription.value
                 const date = this.placeDate.value
@@ -53,7 +55,14 @@ class Main extends Component {
                         required />
                   </div>
                 <button type="submit" className="btn btn-primary btn-block btn-lg">Upload!</button>
-              </form>
+              </form>:
+               <input 
+            
+               key="random1"
+               value={this.props.input}
+               placeholder={"search country"}
+               onChange={(e) => this.props.onChange(e.target.value)}
+              />}
               <p>&nbsp;</p>
               { this.props.places.map((place, key) => {
                 return(
